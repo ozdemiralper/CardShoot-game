@@ -31,6 +31,7 @@ public class CardDatabase : MonoBehaviour
         cardList.Add(new Card(20, "Sanvicho", 6, "Fizik gücü yüksek, müdahaleleri sert bir stoper.", 0, 0, 0, "Cards/sanvicho"));
 
         cardList.Add(new Card(120, "Hava", 0, "..", 4, 0, 0, "Cards/hava"));
+        cardList.Add(new Card(121, "Kupa", 0, "..", 3, 0, 0, "Cards/cup"));
     }
 
     public static Card GetCardByID(int id)

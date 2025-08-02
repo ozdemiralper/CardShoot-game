@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 [System.Serializable]
 public class Card : MonoBehaviour
@@ -12,6 +14,7 @@ public class Card : MonoBehaviour
     public int weather;
     public int extra;
     public string imagePath;
+    public bool isPlayed = false;
 
     // Method to display card information
 
@@ -26,4 +29,9 @@ public class Card : MonoBehaviour
         extra = extraType;
         imagePath = image;
     }
+    public Card Clone()
+    {
+        return new Card(cardID, cardName, cardPower, cardDescription, position, weather, extra, imagePath);
+    }
+
 }

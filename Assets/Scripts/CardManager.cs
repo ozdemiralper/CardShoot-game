@@ -20,25 +20,32 @@ public class CardManager : MonoBehaviour
 
     void GiveRandomCardsToPlayer(int numberOfCards)
     {
-        List<int> usedIndices = new List<int>();
+        Dictionary<string, int> cardNameCounts = new Dictionary<string, int>();
+        Dictionary<int, int> typeCounts = new Dictionary<int, int>(); // cardType'a göre sayým (0 = Defans, 1 = Orta Saha, vs.)
 
-        for (int i = 0; i < numberOfCards; i++)
+        int givenCards = 0;
+        int maxSameCard = 3; // Ayný karttan en fazla 3 tane olabilir, sýnýrsýz istersen bunu kaldýr
+        int maxTypeCount = 5; // Ayný mevki türünden (örneðin defans) en fazla 5 kart
+
+        while (givenCards < numberOfCards)
         {
-            int randIndex;
-            do
-            {
-                randIndex = Random.Range(0, CardDatabase.cardList.Count);
-            } while (usedIndices.Contains(randIndex));  // Ayný kartý 2.kez alma
-
-            usedIndices.Add(randIndex);
+            int randIndex = Random.Range(0, CardDatabase.cardList.Count);
             Card card = CardDatabase.cardList[randIndex];
 
+            // Ayný karttan 3 sýnýrý kontrolü
+            if (cardNameCounts.ContainsKey(card.cardName) && cardNameCounts[card.cardName] >= maxSameCard)
+                continue;
+
+            // Ayný cardType’tan (örneðin defans) maksimum 5 kart sýnýrý kontrolü
+            if (typeCounts.ContainsKey(card.position) && typeCounts[card.position] >= maxTypeCount)
+                continue;
+
+            // Kartý ver
             GameObject cardObj = Instantiate(cardPrefab, handPanel);
             cardObj.transform.localScale = Vector3.one;
 
             Sprite cardSprite = Resources.Load<Sprite>(card.imagePath);
             Image cardImage = cardObj.transform.Find("CardSprite").GetComponent<Image>();
-
             if (cardSprite != null && cardImage != null)
                 cardImage.sprite = cardSprite;
             else
@@ -56,8 +63,20 @@ public class CardManager : MonoBehaviour
             }
 
             playerHand.AddCard(card);
+
+            // Sayaçlarý güncelle
+            if (!cardNameCounts.ContainsKey(card.cardName))
+                cardNameCounts[card.cardName] = 0;
+            cardNameCounts[card.cardName]++;
+
+            if (!typeCounts.ContainsKey(card.position))
+                typeCounts[card.position] = 0;
+            typeCounts[card.position]++;
+
+            givenCards++;
         }
     }
+
 
 
     void UpdateCardCountUI()

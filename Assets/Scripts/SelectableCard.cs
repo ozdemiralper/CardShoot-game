@@ -1,23 +1,27 @@
-using UnityEngine.EventSystems;
-using UnityEngine;
+    using UnityEngine.EventSystems;
+    using UnityEngine;
+using Unity.VisualScripting;
 
-public class SelectableCard : MonoBehaviour, IPointerClickHandler
-{
-    public Card card;
-    public CardDisplay cardDisplay;
-
-    private Vector3 originalScale;
-
-    private float lastClickTime = 0f;
-    private float doubleClickThreshold = 0.3f; // 300 ms
-
-    void Start()
+    public class SelectableCard : MonoBehaviour, IPointerClickHandler
     {
-        originalScale = transform.localScale;
-    }
+        public Card card;
+        public CardDisplay cardDisplay;
+
+        private Vector3 originalScale;
+
+        private float lastClickTime = 0f;
+        private float doubleClickThreshold = 0.3f; // 300 ms
+
+        void Start()
+        {
+            originalScale = transform.localScale;
+        }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (card != null && card.isPlayed)
+            return; // Eðer zaten oynandýysa hiçbir þey yapma
+
         if (Time.time - lastClickTime < doubleClickThreshold)
         {
             // Çift týklama algýlandý
@@ -27,16 +31,39 @@ public class SelectableCard : MonoBehaviour, IPointerClickHandler
         {
             CardSelectionManager.Instance.SelectCard(this);
         }
+
         lastClickTime = Time.time;
     }
 
+
     public void Select()
+        {
+            transform.localScale = originalScale * 1.1f;
+        }
+
+        public void Deselect()
+        {
+            transform.localScale = originalScale;
+        }
+    /*public void SetCard(Card original)
     {
-        transform.localScale = originalScale * 1.1f;
+        card = new Card(
+            original.cardID,
+            original.cardName,
+            original.cardPower,
+            original.cardDescription,
+            original.position,
+            original.weather,
+            original.extra,
+            original.imagePath
+        );
+    }*/
+    public void SetCard(Card original)
+    {
+        card = original.Clone(); // Her prefab için ayrý kopya
+        GetComponent<CardDisplay>().SetCard(card);
+
     }
 
-    public void Deselect()
-    {
-        transform.localScale = originalScale;
-    }
+
 }

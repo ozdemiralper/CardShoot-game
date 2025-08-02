@@ -30,7 +30,7 @@ public class CardDisplay : MonoBehaviour
             case 0: return "D"; // Defans
             case 1: return "M"; // Orta Saha (Midfielder)
             case 2: return "F"; // Forvet (Forward)
-            case 3: return "T"; // Teknik Adam
+            case 3: return "X"; // Kupa
             case 4: return "H"; // Extra
             case 5: return "E"; // Hava (Weather)
             default: return "?";
