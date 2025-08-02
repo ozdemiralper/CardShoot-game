@@ -1,0 +1,8 @@
+SELECT TOP (1000) [Id]
+      ,[Name]
+      ,[Power]
+      ,[Position]
+      ,[Weather]
+      ,[Extra]
+      ,[ImagePath]
+  FROM [cardShootDB].[dbo].[Cards]

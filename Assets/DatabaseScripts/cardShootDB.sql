@@ -1,0 +1,9 @@
+CREATE TABLE Cards (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(50) NOT NULL,
+    Power INT NOT NULL,
+    Position INT NOT NULL DEFAULT 0,
+    Weather INT NOT NULL DEFAULT 0,
+    Extra INT NOT NULL DEFAULT 0,
+    ImagePath NVARCHAR(100)
+);
