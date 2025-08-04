@@ -3,8 +3,16 @@ using UnityEngine;
 
 public class PlayerHand : MonoBehaviour
 {
-    public Transform handPanel;            // Kartlarýn gösterileceði UI paneli
-    public GameObject cardPrefab;          // Sadece Image içeren prefab
+    [Header("Card Prefabs")]
+    public GameObject playerCardPrefab;
+    public GameObject cupCardPrefab;
+    public GameObject weatherCardPrefab;
+    public GameObject coachCardPrefab;
+    public GameObject trophyCardPrefab;
+    public GameObject extraCardPrefab;
+
+
+    public Transform handPanel;         // Sadece Image içeren prefab
     private List<Card> cardsInHand = new List<Card>();
 
     public void AddCard(Card card)
@@ -32,19 +40,46 @@ public class PlayerHand : MonoBehaviour
     {
         return cardsInHand.Count;
     }
+  
     public void DisplayHand()
     {
         // Önce eski kart objelerini temizle
         foreach (Transform child in handPanel)
             Destroy(child.gameObject);
 
-        // Eldeki kartlarý Instantiate et ve görsellerini ayarla
         foreach (Card card in cardsInHand)
         {
-            GameObject cardObj = Instantiate(cardPrefab, handPanel);
+            GameObject selectedPrefab = GetPrefabForCard(card.cardType);
+            GameObject cardObj = Instantiate(selectedPrefab, handPanel);
+
             SelectableCard selectable = cardObj.GetComponent<SelectableCard>();
-            selectable.SetCard(card);
+            if (selectable != null)
+            {
+                selectable.SetCard(card);
+            }
         }
     }
+
+    private GameObject GetPrefabForCard(CardType type)
+    {
+        switch (type)
+        {
+            case CardType.Player:
+                return playerCardPrefab;
+            case CardType.Cup:
+                return cupCardPrefab;
+            case CardType.Weather:
+                return weatherCardPrefab;
+            case CardType.Coach:
+                return coachCardPrefab;
+            case CardType.Trophy:
+                return trophyCardPrefab;
+            case CardType.Extra:
+                return extraCardPrefab;
+            default:
+                return playerCardPrefab; // default fallback
+        }
+    }
+
 
 }

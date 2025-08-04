@@ -45,19 +45,7 @@ using Unity.VisualScripting;
         {
             transform.localScale = originalScale;
         }
-    /*public void SetCard(Card original)
-    {
-        card = new Card(
-            original.cardID,
-            original.cardName,
-            original.cardPower,
-            original.cardDescription,
-            original.position,
-            original.weather,
-            original.extra,
-            original.imagePath
-        );
-    }*/
+    
     public void SetCard(Card original)
     {
         card = original.Clone(); // Her prefab için ayrý kopya

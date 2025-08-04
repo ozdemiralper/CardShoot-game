@@ -4,23 +4,47 @@ using TMPro;
 
 public class CardDisplay : MonoBehaviour
 {
-    public Image cardSpriteImage;  // CardSprite objesindeki Image component
+    public Image cardSpriteImage;
     public TMP_Text powerText;
     public TMP_Text positionText;
+    public TMP_Text cardNameText;
 
     public void SetCard(Card card)
     {
-        Sprite sprite = Resources.Load<Sprite>(card.imagePath);
-        if (sprite != null)
-            cardSpriteImage.sprite = sprite;
-        else
-            Debug.LogWarning("Kart görseli bulunamadý: " + card.imagePath);
+        // Kart görselini yükle
+        if (cardSpriteImage != null)
+        {
+            Sprite sprite = Resources.Load<Sprite>(card.imagePath);
+            if (sprite != null)
+                cardSpriteImage.sprite = sprite;
+            else
+                Debug.LogWarning("Kart görseli bulunamadý: " + card.imagePath);
+        }
 
-        // Gücü sadece sayý olarak göster
-        powerText.text = card.cardPower.ToString();
+        // Tüm alanlarý önce temizle
+        if (powerText != null) powerText.text = "";
+        if (positionText != null) positionText.text = "";
+        if (cardNameText != null) cardNameText.text = "";
 
-        // Pozisyonu kýsaltýlmýþ haliyle göster
-        positionText.text = GetShortPositionName(card.position);
+        // Kart tipine göre gösterilecek alanlar
+        switch (card.cardType)
+        {
+            case CardType.Player:
+                if (powerText != null) powerText.text = card.cardPower.ToString();
+                if (positionText != null) positionText.text = GetShortPositionName(card.position);
+                break;
+
+            case CardType.Weather:
+                if (cardNameText != null) cardNameText.text = GetWeatherEffectName(card.cardPower);
+                if (positionText != null) positionText.text = GetShortPositionName(card.position);
+                break;
+
+            case CardType.Cup:
+                // Sadece görsel gösterilir, diðer alanlar boþ kalýr
+                break;
+
+                // Diðer kart türlerinde þimdilik hiçbir alan gösterilmiyor
+        }
     }
 
     private string GetShortPositionName(int code)
@@ -28,12 +52,20 @@ public class CardDisplay : MonoBehaviour
         switch (code)
         {
             case 0: return "D"; // Defans
-            case 1: return "M"; // Orta Saha (Midfielder)
-            case 2: return "F"; // Forvet (Forward)
-            case 3: return "X"; // Kupa
-            case 4: return "H"; // Extra
-            case 5: return "E"; // Hava (Weather)
-            default: return "?";
+            case 1: return "M"; // Orta Saha
+            case 2: return "F"; // Forvet
+            default: return "";
+        }
+    }
+
+    private string GetWeatherEffectName(int type)
+    {
+        switch (type)
+        {
+            case 0: return "RAIN";
+            case 1: return "SNOW";
+            case 2: return "WIND";
+            default: return "Hava";
         }
     }
 }

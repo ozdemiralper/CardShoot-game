@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class InfoCardDisplay : MonoBehaviour
 {
@@ -18,23 +19,68 @@ public class InfoCardDisplay : MonoBehaviour
         else
             Debug.LogWarning("Kart görseli bulunamadý: " + card.imagePath);
 
-        powerText.text = card.cardPower.ToString();
-        positionText.text = GetShortPositionName(card.position);
-        playerNameText.text = card.cardName;
+        // Baþta hepsini kapatalým
+        powerText.gameObject.SetActive(false);
+        positionText.gameObject.SetActive(false);
+        playerNameText.gameObject.SetActive(false);
+
         descriptionText.text = card.cardDescription;
+
+        switch (card.cardType)
+        {
+            case CardType.Player:
+                powerText.text = card.cardPower.ToString();
+                powerText.gameObject.SetActive(true);
+
+                positionText.text = GetShortPositionName(card.position);
+                positionText.gameObject.SetActive(true);
+
+                playerNameText.text = playerName;
+                playerNameText.gameObject.SetActive(true);
+                break;
+
+            case CardType.Weather:
+                powerText.text = GetWeatherEffectName(card.cardPower); // "RAIN", "SNOW", vs.
+                powerText.gameObject.SetActive(true);
+
+                positionText.text = GetShortPositionName(card.position); // Etki alaný olarak gösteriyoruz
+                positionText.gameObject.SetActive(true);
+
+                // Ýsim gösterilmeyecek
+                break;
+
+            case CardType.Cup:
+                powerText.text = "CUP";
+                powerText.gameObject.SetActive(true);
+
+                positionText.text = "X2";
+                positionText.gameObject.SetActive(true);
+                break;
+            default:
+                // Sadece açýklama ve resim gösterilir
+                break;
+        }
     }
 
     private string GetShortPositionName(int code)
     {
-        switch (code)
+        return code switch
         {
-            case 0: return "D";
-            case 1: return "M";
-            case 2: return "F";
-            case 3: return "T";
-            case 4: return "H";
-            case 5: return "E";
-            default: return "?";
-        }
+            0 => "D",
+            1 => "M",
+            2 => "F",
+            _ => "?"
+        };
+    }
+    private string GetWeatherEffectName(int type)
+    {
+        return type switch
+        {
+            0 => "RAIN",
+            1 => "SNOW",
+            2 => "WIND",
+            3 => "NORMAL",
+            _ => "?"
+        };
     }
 }

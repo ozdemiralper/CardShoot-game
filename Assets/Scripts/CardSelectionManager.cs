@@ -8,7 +8,12 @@ public class CardSelectionManager : MonoBehaviour
 
     [Header("Info Card Settings")]
     public Transform infoCardPanel;        // Info kartlarýn oluþturulacaðý panel
-    public GameObject infoCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
+    public GameObject infoPlayerCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
+    public GameObject infoWeatherCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
+    public GameObject infoCupCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
+    public GameObject infoCoachCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
+    public GameObject infoTrophyCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
+    public GameObject infoExtraCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
 
     void Awake()
     {
@@ -40,14 +45,36 @@ public class CardSelectionManager : MonoBehaviour
     {
         ClearInfoCard();
 
-        GameObject infoCardObj = Instantiate(infoCardPrefab, infoCardPanel);
+        GameObject prefabToInstantiate = GetInfoCardPrefab(card.card.cardType);
+        GameObject infoCardObj = Instantiate(prefabToInstantiate, infoCardPanel);
         InfoCardDisplay display = infoCardObj.GetComponent<InfoCardDisplay>();
         if (display != null)
         {
-            // Örnek olarak oyuncu adý "Player1" olarak verdim, sen dinamik ayarlayabilirsin
-            display.SetCardInfo(card.card, "Player1");
+            display.SetCardInfo(card.card, card.card.cardName);
         }
     }
+
+    GameObject GetInfoCardPrefab(CardType type)
+    {
+        switch (type)
+        {
+            case CardType.Player:
+                return infoPlayerCardPrefab;
+            case CardType.Weather:
+                return infoWeatherCardPrefab;
+            case CardType.Cup:
+                return infoCupCardPrefab;
+            case CardType.Coach:
+                return infoCoachCardPrefab;
+            case CardType.Trophy:
+                return infoTrophyCardPrefab;
+            case CardType.Extra:
+                return infoExtraCardPrefab;
+            default:
+                return infoPlayerCardPrefab; // default fallback
+        }
+    }
+
 
     public void DeselectAll()
     {

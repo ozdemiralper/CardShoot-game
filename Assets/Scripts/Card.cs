@@ -4,8 +4,20 @@ using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 [System.Serializable]
-public class Card : MonoBehaviour
+
+public enum CardType
 {
+    Player,     // Oyuncu kartý
+    Cup,       // Kupa kartý
+    Weather,    // Hava durumu kartý   cardPower= 0-3 (0: Normal, 1: Yaðmur, 2: Kar, 3: Fýrtýna) 
+    Coach,      // Teknik direktör
+    Trophy,     // Kupa
+    Extra       // Ekstra özel kart
+}
+
+public class Card
+{
+    public CardType cardType;
     public int cardID; // Unique identifier for the card
     public string cardName;
     public int cardPower;
@@ -18,8 +30,9 @@ public class Card : MonoBehaviour
 
     // Method to display card information
 
-    public Card(int id, string name, int power, string description, int pos, int weatherType, int extraType, string image)
+    public Card(CardType type, int id, string name, int power, string description, int pos, int weatherType, int extraType, string image)
     {
+        cardType = type;
         cardID = id;
         cardName = name;
         cardPower = power;
@@ -31,7 +44,7 @@ public class Card : MonoBehaviour
     }
     public Card Clone()
     {
-        return new Card(cardID, cardName, cardPower, cardDescription, position, weather, extra, imagePath);
+        return new Card(cardType, cardID, cardName, cardPower, cardDescription, position, weather, extra, imagePath);
     }
 
 }
