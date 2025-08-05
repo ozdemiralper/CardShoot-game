@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class CardSelectionManager : MonoBehaviour
 {
-    public static CardSelectionManager Instance;
 
-    private SelectableCard selectedCard = null;
+    public static CardSelectionManager Instance;
+    public GameObject cupChoicePanel;  // Inspector'dan atamak için
+
+    public SelectableCard selectedCard = null;
 
     [Header("Info Card Settings")]
     public Transform infoCardPanel;        // Info kartlarýn oluþturulacaðý panel
@@ -33,7 +35,13 @@ public class CardSelectionManager : MonoBehaviour
         selectedCard.Select();
 
         CreateInfoCard(card);
+
+        if (card.card.cardType == CardType.Cup)
+            cupChoicePanel.SetActive(true);
+        else
+            cupChoicePanel.SetActive(false);
     }
+
 
     void ClearInfoCard()
     {
@@ -84,5 +92,19 @@ public class CardSelectionManager : MonoBehaviour
             selectedCard = null;
             ClearInfoCard();
         }
+        if (cupChoicePanel != null)
+            cupChoicePanel.SetActive(false);
     }
+
+    public void ClearSelection()
+    {
+        selectedCard = null;
+    }
+
+    public SelectableCard GetSelectedCard()
+    {
+        return selectedCard;
+    }
+
+
 }

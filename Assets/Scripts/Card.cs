@@ -47,4 +47,10 @@ public class Card
         return new Card(cardType, cardID, cardName, cardPower, cardDescription, position, weather, extra, imagePath);
     }
 
+    public enum CupPosition
+    {
+        ForwardCup,
+        MidfieldCup,
+        DefenseCup
+    }
 }

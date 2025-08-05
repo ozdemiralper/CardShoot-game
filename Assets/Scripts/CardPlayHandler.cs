@@ -192,4 +192,48 @@ public class CardPlayHandler : MonoBehaviour
 
     }
 
+    public void PlaceCupCard(Card card, Card.CupPosition cupPosition)
+    {
+        if (card.isPlayed)
+            return;
+
+        Transform targetArea = null;
+
+        switch (cupPosition)
+        {
+            case Card.CupPosition.ForwardCup:
+                targetArea = forwardArea;
+                break;
+            case Card.CupPosition.MidfieldCup:
+                targetArea = midfieldArea;
+                break;
+            case Card.CupPosition.DefenseCup:
+                targetArea = defenseArea;
+                break;
+            default:
+                Debug.LogError("Geçersiz cup pozisyonu: " + cupPosition);
+                return;
+        }
+
+        GameObject cardObj = Instantiate(cupCardPrefab, targetArea);
+        CardDisplay display = cardObj.GetComponent<CardDisplay>();
+        if (display != null)
+            display.SetCard(card);
+
+        SelectableCard selectable = cardObj.GetComponent<SelectableCard>();
+        if (selectable != null)
+        {
+            selectable.card = card;
+            selectable.cardDisplay = display;
+        }
+
+        card.isPlayed = true;
+        cupCards.Add(card);
+        playerHand.RemoveCard(card);
+
+        UpdateCardCountsUI();
+        UpdatePowerTexts();
+    }
+
+
 }

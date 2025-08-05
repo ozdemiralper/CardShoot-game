@@ -21,7 +21,7 @@ public class CardDatabase : MonoBehaviour
         cardList.Add(new Card(CardType.Player, 11, "Embapo", 9, "....", 2, 0, 0, "Cards/embapo"));
         cardList.Add(new Card(CardType.Player, 12, "Lewandoesk", 9, "Güçlü ve etkili forvet, mükemmel golcü.", 2, 0, 0, "Cards/lewandoesk"));
         cardList.Add(new Card(CardType.Player, 13, "Decenrice", 8, "Dayanýklý ve pas isabeti yüksek orta saha oyuncusu.", 1, 0, 0, "Cards/decenrice"));
-        cardList.Add(new Card(CardType.Player, 14, "Minato", 6, "Fiziksel gücü yüksek, hava toplarýnda etkili defans oyuncusu.", 0, 0, 0, "Cards/minato"));
+        cardList.Add(new Card(CardType.Player, 14, "Minato", 6, "Hava toplarýnda etkili defans oyuncusu.", 0, 0, 0, "Cards/minato"));
         //cardList.Add(new Card(CardType.Player, 15, "Lingaldo", 2, "Zaman zaman sahneye çýkan orta saha oyuncusu.", 1, 0, 0, "Cards/lingaldo"));
         cardList.Add(new Card(CardType.Player, 16, "Calhanoro", 7, "Uzaktan þutlarý ve duran toplarýyla etkili oyun kurucu.", 1, 0, 0, "Cards/calhanoro"));
         cardList.Add(new Card(CardType.Player, 17, "Kadiolu", 7, "Çift yönlü oynayabilen dinamik bek oyuncusu.", 0, 0, 0, "Cards/kadiolu"));
@@ -29,14 +29,17 @@ public class CardDatabase : MonoBehaviour
         cardList.Add(new Card(CardType.Player, 19, "Rafasel", 6, "Hýzý ve çevikliðiyle fark yaratan ofansif orta saha.", 1, 0, 0, "Cards/rafasel"));
         cardList.Add(new Card(CardType.Player, 20, "Sanvicho", 6, "Fizik gücü yüksek, müdahaleleri sert bir stoper.", 0, 0, 0, "Cards/sanvicho"));
 
-        cardList.Add(new Card(CardType.Weather, 120, "Rain", 0, "Defans oyuncularýnýn kabusu.", 0, 0, 0, "Cards/rain"));
-        cardList.Add(new Card(CardType.Weather, 121, "Snow", 1, "Kar yaðýþý, sahada kayganlýk yaratýr.", 1, 0, 0, "Cards/snow"));
-        cardList.Add(new Card(CardType.Weather, 121, "Wind", 2, "Rüzgar, topun yönünü etkiler.", 2, 0, 0, "Cards/wind"));
-        cardList.Add(new Card(CardType.Weather, 123, "Rain", 0, "Defans oyuncularýnýn kabusu.", 0, 0, 0, "Cards/rain"));
-        cardList.Add(new Card(CardType.Weather, 124, "Snow", 1, "Kar yaðýþý, sahada kayganlýk yaratýr.", 1, 0, 0, "Cards/snow"));
-        cardList.Add(new Card(CardType.Weather, 125, "Wind", 2, "Rüzgar, topun yönünü etkiler.", 2, 0, 0, "Cards/wind"));
+        
 
-        cardList.Add(new Card(CardType.Cup    , 126, "Kupa", 0, "Bulunduðu mevkiideki oyucularý X2 yapar", 0, 0, 0, "Cards/cup"));
+        cardList.Add(new Card(CardType.Weather, 200, "Rain", 0, "Defans oyuncularýnýn kabusu.", 0, 0, 0, "Cards/rain"));
+        cardList.Add(new Card(CardType.Weather, 201, "Snow", 1, "Kar yaðýþý, sahada kayganlýk yaratýr.", 1, 0, 0, "Cards/snow"));
+        cardList.Add(new Card(CardType.Weather, 202, "Wind", 2, "Rüzgar, topun yönünü etkiler.", 2, 0, 0, "Cards/wind"));
+        cardList.Add(new Card(CardType.Weather, 203, "Rain", 0, "Defans oyuncularýnýn kabusu.", 0, 0, 0, "Cards/rain"));
+        cardList.Add(new Card(CardType.Weather, 204, "Snow", 1, "Kar yaðýþý, sahada kayganlýk yaratýr.", 1, 0, 0, "Cards/snow"));
+        cardList.Add(new Card(CardType.Weather, 205, "Wind", 2, "Rüzgar, topun yönünü etkiler.", 2, 0, 0, "Cards/wind"));
+
+        cardList.Add(new Card(CardType.Cup    , 206, "Kupa", 0, "Bulunduðu mevkiideki oyucularý X2 yapar", 0, 0, 0, "Cards/cup"));
+        cardList.Add(new Card(CardType.Cup    , 207, "Kupa", 0, "Bulunduðu mevkiideki oyucularý X2 yapar", 0, 0, 0, "Cards/cup"));
     }
 
     public static Card GetCardByID(int id)
