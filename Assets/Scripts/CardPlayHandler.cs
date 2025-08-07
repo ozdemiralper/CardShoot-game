@@ -40,7 +40,6 @@ public class CardPlayHandler : MonoBehaviour
     public GameObject extraCardPrefab;
     
     public PlayerHand playerHand;
-    private HandCardCountDisplay handCardCountDisplay;
 
     public static CardPlayHandler Instance;
 
@@ -48,10 +47,7 @@ public class CardPlayHandler : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
-
-        handCardCountDisplay = FindObjectOfType<HandCardCountDisplay>();
     }
-
     public void PlayCard(SelectableCard selectedCard)
     {
         Card card = selectedCard.card;
@@ -79,10 +75,9 @@ public class CardPlayHandler : MonoBehaviour
             }
         }
 
-
-
         Destroy(selectedCard.gameObject);
-
+        playerHand.RemoveCard(card);
+        card.isPlayed = true;
         Transform targetArea = null;
         switch (card.cardType)
         {
@@ -102,6 +97,7 @@ public class CardPlayHandler : MonoBehaviour
                         forwardCards.Add(card);
                         break;
                 }
+                UpdateAllPlayerCardPowers();
                 break;
             
             case CardType.Captain:
@@ -122,19 +118,11 @@ public class CardPlayHandler : MonoBehaviour
                         captainForwardCards.Add(card);
                         captainCards.Add(card);
                         break;
-                } break;
-
+                }
+                break;
             case CardType.Weather:
                 targetArea = weatherArea;
                 weatherCards.Add(card);
-                break;
-            case CardType.Coach:
-                targetArea = coachArea;
-                coachCards.Add(card);
-                break;
-            case CardType.Extra:
-                targetArea = extraArea;
-                extraCards.Add(card);
                 break;
             default:
                 Debug.LogWarning("Bilinmeyen kart tipi: " + card.cardType);
@@ -186,10 +174,79 @@ public class CardPlayHandler : MonoBehaviour
                 selectable.cardDisplay = display;
             }
         }
-        UpdateCardCountsUI();
+        UpdateAllPlayerCardPowers();
         UpdatePowerTexts();
     }
+    private void UpdateAllPlayerCardPowers()
+    {
+        List<Card> allPlayerCards = new List<Card>();
+        allPlayerCards.AddRange(defenseCards);
+        allPlayerCards.AddRange(midfieldCards);
+        allPlayerCards.AddRange(forwardCards);
 
+        // 1. Orijinal güce sýfýrla
+        foreach (var card in allPlayerCards)
+        {
+            card.cardPower = card.originalPower;
+        }
+
+        // 2. Duplicate kartlarý 2x yap
+        Dictionary<int, int> cardIDCounts = new Dictionary<int, int>();
+        foreach (var card in allPlayerCards)
+        {
+            if (!cardIDCounts.ContainsKey(card.cardID))
+                cardIDCounts[card.cardID] = 0;
+            cardIDCounts[card.cardID]++;
+        }
+        foreach (var card in allPlayerCards)
+        {
+            if (cardIDCounts[card.cardID] == 2)
+                card.cardPower = card.originalPower * 2;
+        }
+
+        // 3. Hava etkisini uygula
+        foreach (var weatherCard in weatherCards)
+        {
+            var affectedCards = allPlayerCards.Where(c => c.position == weatherCard.position && c.cardType == CardType.Player).ToList();
+            foreach (var c in affectedCards)
+                c.cardPower = 1;
+        }
+
+        // 4. Kaptan etkisini uygula
+        foreach (var captainCard in captainCards)
+        {
+            var affectedCards = allPlayerCards.Where(c => c.position == captainCard.position && c.cardType == CardType.Player).ToList();
+            foreach (var c in affectedCards)
+                c.cardPower *= 2;
+        }
+
+        // 5. Görselleri güncelle
+        UpdateCardVisualsInArea(0);
+        UpdateCardVisualsInArea(1);
+        UpdateCardVisualsInArea(2);
+    }
+    private void UpdateCardVisualsInArea(int position)
+    {
+        Transform area = null;
+
+        switch (position)
+        {
+            case 0: area = defenseArea; break;
+            case 1: area = midfieldArea; break;
+            case 2: area = forwardArea; break;
+            default: return;
+        }
+
+        foreach (Transform child in area)
+        {
+            CardDisplay display = child.GetComponent<CardDisplay>();
+            SelectableCard selectable = child.GetComponent<SelectableCard>();
+            if (display != null && selectable != null)
+            {
+                display.SetCard(selectable.card);
+            }
+        }
+    }
     private int CalculateTotalPower(List<Card> cards)
     {
         int total = 0;
@@ -197,27 +254,6 @@ public class CardPlayHandler : MonoBehaviour
             total += c.cardPower;
         return total;
     }
-
-    void UpdateCardCountsUI()
-    {
-        if (handCardCountDisplay == null)
-            return;
-        int playerHandCount = playerHand.GetCardCount();
-
-        // Sahadaki kartlarý hesapla
-        int playerFieldCount = defenseArea.childCount + midfieldArea.childCount + forwardArea.childCount + weatherArea.childCount;
-
-        // Rakip el kart sayýsý ve saha kart sayýsý (örnek sabit veya kendi rakip yönetimine göre)
-        int opponentHandCount = 10; // Mesela sabit, istersen gerçek rakip yönetiminden çek
-        int opponentFieldCount = 5; // Örnek deðer
-
-        handCardCountDisplay.SetPlayerCardCount(playerHandCount);
-        handCardCountDisplay.SetPlayerFieldCardCount(playerFieldCount);
-
-        handCardCountDisplay.SetOpponentCardCount(opponentHandCount);
-        handCardCountDisplay.SetOpponentFieldCardCount(opponentFieldCount);
-    }
-
     public void UpdatePowerTexts()
     {
         defensePowerText.text = CalculateTotalPower(defenseCards).ToString();
@@ -226,7 +262,4 @@ public class CardPlayHandler : MonoBehaviour
         totalPowerText.text = (CalculateTotalPower(defenseCards) + CalculateTotalPower(midfieldCards) + CalculateTotalPower(forwardCards)).ToString();
 
     }
-
-
-
 }

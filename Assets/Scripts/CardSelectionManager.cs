@@ -35,13 +35,11 @@ public class CardSelectionManager : MonoBehaviour
 
         CreateInfoCard(card);
     }
-
     void ClearInfoCard()
     {
         foreach (Transform child in infoCardPanel)
             Destroy(child.gameObject);
     }
-
     void CreateInfoCard(SelectableCard card)
     {
         ClearInfoCard();
@@ -54,7 +52,6 @@ public class CardSelectionManager : MonoBehaviour
             display.SetCardInfo(card.card, card.card.cardName);
         }
     }
-
     GameObject GetInfoCardPrefab(CardType type)
     {
         switch (type)

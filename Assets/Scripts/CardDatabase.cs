@@ -32,9 +32,6 @@ public class CardDatabase : MonoBehaviour
         cardList.Add(new Card(CardType.Weather, 200, "Rain", 0, "Defans oyuncularýnýn kabusu.", 0, 0, 0, "Cards/rain"));
         cardList.Add(new Card(CardType.Weather, 201, "Snow", 1, "Kar yaðýþý, sahada kayganlýk yaratýr.", 1, 0, 0, "Cards/snow"));
         cardList.Add(new Card(CardType.Weather, 202, "Wind", 2, "Rüzgar, topun yönünü etkiler.", 2, 0, 0, "Cards/wind"));
-        cardList.Add(new Card(CardType.Weather, 203, "Rain", 0, "Defans oyuncularýnýn kabusu.", 0, 0, 0, "Cards/rain"));
-        cardList.Add(new Card(CardType.Weather, 204, "Snow", 1, "Kar yaðýþý, sahada kayganlýk yaratýr.", 1, 0, 0, "Cards/snow"));
-        cardList.Add(new Card(CardType.Weather, 205, "Wind", 2, "Rüzgar, topun yönünü etkiler.", 2, 0, 0, "Cards/wind"));
 
         cardList.Add(new Card(CardType.Captain, 206, "Kaptan", 0, "Bulunduðu mevkiideki oyucularý X2 yapar", 0, 0, 0, "Cards/defCap1"));
         cardList.Add(new Card(CardType.Captain, 207, "Kaptan", 0, "Bulunduðu mevkiideki oyucularý X2 yapar", 0, 0, 0, "Cards/defCap1"));

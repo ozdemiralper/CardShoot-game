@@ -504,54 +504,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -1820, y: -980}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &337430014
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 337430015}
-  - component: {fileID: 337430016}
-  m_Layer: 0
-  m_Name: CountManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &337430015
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337430014}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1530439073}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &337430016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337430014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4be7af1f27139dd40b3f2dfbb658cc2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCardCountText: {fileID: 1583294623}
-  opponentCardCountText: {fileID: 104194746}
-  playerFieldCardCountText: {fileID: 0}
-  opponentFieldCardCountText: {fileID: 0}
 --- !u!1 &358994015
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,7 +589,6 @@ MonoBehaviour:
   handPanel: {fileID: 1888649308}
   cardPrefab: {fileID: 6032376185138528422, guid: 53206264a957795458f7b122d3fbed97, type: 3}
   playerHand: {fileID: 1579656780}
-  handCardCountDisplay: {fileID: 337430016}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,7 +2020,6 @@ Transform:
   - {fileID: 451312671}
   - {fileID: 1579656781}
   - {fileID: 2028287305}
-  - {fileID: 337430015}
   - {fileID: 1943714685}
   - {fileID: 1879785790}
   m_Father: {fileID: 0}
@@ -2110,6 +2060,7 @@ MonoBehaviour:
   trophyCardPrefab: {fileID: 0}
   extraCardPrefab: {fileID: 0}
   handPanel: {fileID: 1888649308}
+  cardCountText: {fileID: 1583294623}
 --- !u!4 &1579656781
 Transform:
   m_ObjectHideFlags: 0

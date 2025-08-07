@@ -46,7 +46,6 @@ public class CardDisplay : MonoBehaviour
                 // Diðer kart türlerinde þimdilik hiçbir alan gösterilmiyor
         }
     }
-
     private string GetShortPositionName(int code)
     {
         switch (code)
@@ -57,7 +56,6 @@ public class CardDisplay : MonoBehaviour
             default: return "";
         }
     }
-
     private string GetWeatherEffectName(int type)
     {
         switch (type)

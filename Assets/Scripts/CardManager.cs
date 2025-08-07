@@ -8,39 +8,41 @@ public class CardManager : MonoBehaviour
     public Transform handPanel;            // Oyuncunun elini gösterecek panel
     public GameObject cardPrefab;          // Sadece Image içeren prefab
     public PlayerHand playerHand;          // Oyuncunun elini yöneten script
-
-    public HandCardCountDisplay handCardCountDisplay; // Kart sayýlarýný gösteren UI scripti
-
     void Start()
     {
         playerHand.ClearHand();
         GiveRandomCardsToPlayer(10); // Oyuncuya 10 kart veriyoruz
-        UpdateCardCountUI();
     }
 
     void GiveRandomCardsToPlayer(int numberOfCards)
     {
-        Dictionary<string, int> cardNameCounts = new Dictionary<string, int>();
-        Dictionary<int, int> typeCounts = new Dictionary<int, int>(); // cardType'a göre sayým (0 = Defans, 1 = Orta Saha, vs.)
+        Dictionary<string, int> cardNameCounts = new Dictionary<string, int>(); // Ayný isimli kart için sayaç
+        int weatherCount = 0;
+        int captainCount = 0;
 
         int givenCards = 0;
-        int maxSameCard = 3; // Ayný karttan en fazla 3 tane olabilir, sýnýrsýz istersen bunu kaldýr
-        int maxTypeCount = 5; // Ayný mevki türünden (örneðin defans) en fazla 5 kart
+        int maxSameCard = 2;      // Ayný karttan maksimum 2
+        int maxWeatherCards = 2;  // Maksimum 2 weather
+        int maxCaptainCards = 2;  // Maksimum 2 captain
 
         while (givenCards < numberOfCards)
         {
             int randIndex = Random.Range(0, CardDatabase.cardList.Count);
             Card card = CardDatabase.cardList[randIndex];
 
-            // Ayný karttan 3 sýnýrý kontrolü
+            // Ayný isimli karttan fazla verme
             if (cardNameCounts.ContainsKey(card.cardName) && cardNameCounts[card.cardName] >= maxSameCard)
                 continue;
 
-            // Ayný cardType’tan (örneðin defans) maksimum 5 kart sýnýrý kontrolü
-            if (typeCounts.ContainsKey(card.position) && typeCounts[card.position] >= maxTypeCount)
+            // Weather sýnýrý
+            if (card.cardType == CardType.Weather && weatherCount >= maxWeatherCards)
                 continue;
 
-            // Kartý ver
+            // Captain sýnýrý
+            if (card.cardType == CardType.Captain && captainCount >= maxCaptainCards)
+                continue;
+
+            // Kartý oluþtur
             GameObject cardObj = Instantiate(cardPrefab, handPanel);
             cardObj.transform.localScale = Vector3.one;
 
@@ -69,20 +71,13 @@ public class CardManager : MonoBehaviour
                 cardNameCounts[card.cardName] = 0;
             cardNameCounts[card.cardName]++;
 
-            if (!typeCounts.ContainsKey(card.position))
-                typeCounts[card.position] = 0;
-            typeCounts[card.position]++;
+            if (card.cardType == CardType.Weather)
+                weatherCount++;
+
+            if (card.cardType == CardType.Captain)
+                captainCount++;
 
             givenCards++;
-        }
-    }
-
-    void UpdateCardCountUI()
-    {
-        if (handCardCountDisplay != null)
-        {
-            handCardCountDisplay.SetPlayerCardCount(playerHand.GetCardCount());
-            handCardCountDisplay.SetOpponentCardCount(10); 
         }
     }
 }

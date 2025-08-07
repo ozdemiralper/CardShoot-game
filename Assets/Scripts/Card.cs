@@ -21,6 +21,7 @@ public class Card
     public int cardID; // Unique identifier for the card
     public string cardName;
     public int cardPower;
+    public int originalPower;  // Orijinal güç, her zaman kartýn temel gücü
     public string cardDescription;
     public int position;
     public int weather;
@@ -34,6 +35,7 @@ public class Card
         cardID = id;
         cardName = name;
         cardPower = power;
+        originalPower = power;  // Orijinal güç burada atanýyor
         cardDescription = description;
         position = pos;
         weather = weatherType;
@@ -45,3 +47,4 @@ public class Card
         return new Card(cardType, cardID, cardName, cardPower, cardDescription, position, weather, extra, imagePath);
     }
 }
+
