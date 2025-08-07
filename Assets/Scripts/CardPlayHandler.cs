@@ -1,14 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardPlayHandler : MonoBehaviour
 {
-
     public List<Card> defenseCards = new List<Card>();
     public List<Card> midfieldCards = new List<Card>();
     public List<Card> forwardCards = new List<Card>();
     public List<Card> weatherCards = new List<Card>();
-    public List<Card> cupCards = new List<Card>();
+    public List<Card> captainCards = new List<Card>(); 
+    public List<Card> captainDefenseCards = new List<Card>();
+    public List<Card> captainMidfieldCards = new List<Card>();
+    public List<Card> captainForwardCards = new List<Card>();
+    
     public List<Card> coachCards = new List<Card>();
     public List<Card> extraCards = new List<Card>();
 
@@ -17,25 +21,28 @@ public class CardPlayHandler : MonoBehaviour
     public TMPro.TMP_Text forwardPowerText;
     public TMPro.TMP_Text totalPowerText;
 
-    public static CardPlayHandler Instance;
-
     public Transform defenseArea;
     public Transform midfieldArea;
     public Transform forwardArea;
+
+    public Transform defenseCaptainArea;
+    public Transform midfieldCaptainArea;
+    public Transform forwardCaptainArea;
+
     public Transform weatherArea;
-    public Transform cupArea;
     public Transform coachArea;
     public Transform extraArea;
 
     public GameObject playerCardPrefab;
     public GameObject weatherCardPrefab;
-    public GameObject cupCardPrefab;
+    public GameObject captainCardPrefab;
     public GameObject coachCardPrefab;
     public GameObject extraCardPrefab;
     
-
     public PlayerHand playerHand;
     private HandCardCountDisplay handCardCountDisplay;
+
+    public static CardPlayHandler Instance;
 
     void Awake()
     {
@@ -49,23 +56,33 @@ public class CardPlayHandler : MonoBehaviour
     {
         Card card = selectedCard.card;
         if (card.isPlayed)
-            return; // Zaten oynandýysa iþlemi iptal et
+            return;
 
-        // Weather kartlarý için özel kontrol
-        bool alreadyExists = weatherCards.Exists(c => c.cardPower == card.cardPower);
-        if (alreadyExists)
+        if (card.cardType == CardType.Weather)
         {
-            Debug.Log("Ayný türden ve güçte Weather kartý zaten var, oynanamaz.");
-            return; // Kartýn tekrar oynanmasýný engelle
+            bool sameWeatherExists = weatherCards.Any(c => c.cardPower == card.cardPower);
+
+            if (sameWeatherExists)
+            {
+                Debug.Log("Bu hava türü (RAIN, SNOW, WIND) zaten oyunda. Tekrar oynanamaz.");
+                return;
+            }
+        }
+        if (card.cardType == CardType.Captain)
+        {
+            bool sameCaptainExists = captainCards.Any(c => c.cardPower == card.cardPower);
+
+            if (sameCaptainExists)
+            {
+                Debug.Log("Bu kaptan türü zaten oyunda. Tekrar oynanamaz.");
+                return;
+            }
         }
 
-        // 1. Kartý elden çýkar
-        playerHand.RemoveCard(card);
 
-        // 2. UI objesini yok et
+
         Destroy(selectedCard.gameObject);
 
-        // 3. Kartý oyun alanýna koy
         Transform targetArea = null;
         switch (card.cardType)
         {
@@ -86,13 +103,30 @@ public class CardPlayHandler : MonoBehaviour
                         break;
                 }
                 break;
+            
+            case CardType.Captain:
+                switch (card.cardPower)
+                {
+                    case 0:
+                        targetArea = defenseCaptainArea;
+                        captainDefenseCards.Add(card);
+                        captainCards.Add(card);
+                        break;
+                    case 1:
+                        targetArea = midfieldCaptainArea;
+                        captainMidfieldCards.Add(card);
+                        captainCards.Add(card);
+                        break;
+                    case 2:
+                        targetArea = forwardCaptainArea;
+                        captainForwardCards.Add(card);
+                        captainCards.Add(card);
+                        break;
+                } break;
+
             case CardType.Weather:
                 targetArea = weatherArea;
                 weatherCards.Add(card);
-                break;
-            case CardType.Cup:
-                targetArea = cupArea;
-                cupCards.Add(card);
                 break;
             case CardType.Coach:
                 targetArea = coachArea;
@@ -119,8 +153,8 @@ public class CardPlayHandler : MonoBehaviour
                 case CardType.Weather:
                     prefabToUse = weatherCardPrefab;
                     break;
-                case CardType.Cup:
-                    prefabToUse = cupCardPrefab;
+                case CardType.Captain:
+                    prefabToUse = captainCardPrefab;
                     break;
                 case CardType.Coach:
                     prefabToUse = coachCardPrefab;
@@ -183,6 +217,7 @@ public class CardPlayHandler : MonoBehaviour
         handCardCountDisplay.SetOpponentCardCount(opponentHandCount);
         handCardCountDisplay.SetOpponentFieldCardCount(opponentFieldCount);
     }
+
     public void UpdatePowerTexts()
     {
         defensePowerText.text = CalculateTotalPower(defenseCards).ToString();
@@ -192,48 +227,6 @@ public class CardPlayHandler : MonoBehaviour
 
     }
 
-    public void PlaceCupCard(Card card, Card.CupPosition cupPosition)
-    {
-        if (card.isPlayed)
-            return;
-
-        Transform targetArea = null;
-
-        switch (cupPosition)
-        {
-            case Card.CupPosition.ForwardCup:
-                targetArea = forwardArea;
-                break;
-            case Card.CupPosition.MidfieldCup:
-                targetArea = midfieldArea;
-                break;
-            case Card.CupPosition.DefenseCup:
-                targetArea = defenseArea;
-                break;
-            default:
-                Debug.LogError("Geçersiz cup pozisyonu: " + cupPosition);
-                return;
-        }
-
-        GameObject cardObj = Instantiate(cupCardPrefab, targetArea);
-        CardDisplay display = cardObj.GetComponent<CardDisplay>();
-        if (display != null)
-            display.SetCard(card);
-
-        SelectableCard selectable = cardObj.GetComponent<SelectableCard>();
-        if (selectable != null)
-        {
-            selectable.card = card;
-            selectable.cardDisplay = display;
-        }
-
-        card.isPlayed = true;
-        cupCards.Add(card);
-        playerHand.RemoveCard(card);
-
-        UpdateCardCountsUI();
-        UpdatePowerTexts();
-    }
 
 
 }

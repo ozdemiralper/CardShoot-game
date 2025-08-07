@@ -8,9 +8,9 @@ using UnityEngine;
 public enum CardType
 {
     Player,     // Oyuncu kartý
-    Cup,       // Kupa kartý
+    Captain,    // Kaptan kartý           cardPower= 0-3 
     Weather,    // Hava durumu kartý   cardPower= 0-3 (0: Normal, 1: Yaðmur, 2: Kar, 3: Fýrtýna) 
-    Coach,      // Teknik direktör
+    Coach,      // Teknik direktör   
     Trophy,     // Kupa
     Extra       // Ekstra özel kart
 }
@@ -28,8 +28,6 @@ public class Card
     public string imagePath;
     public bool isPlayed = false;
 
-    // Method to display card information
-
     public Card(CardType type, int id, string name, int power, string description, int pos, int weatherType, int extraType, string image)
     {
         cardType = type;
@@ -45,12 +43,5 @@ public class Card
     public Card Clone()
     {
         return new Card(cardType, cardID, cardName, cardPower, cardDescription, position, weather, extra, imagePath);
-    }
-
-    public enum CupPosition
-    {
-        ForwardCup,
-        MidfieldCup,
-        DefenseCup
     }
 }

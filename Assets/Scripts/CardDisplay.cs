@@ -39,8 +39,8 @@ public class CardDisplay : MonoBehaviour
                 if (positionText != null) positionText.text = GetShortPositionName(card.position);
                 break;
 
-            case CardType.Cup:
-                // Sadece görsel gösterilir, diðer alanlar boþ kalýr
+            case CardType.Captain:
+                if (positionText != null) positionText.text = GetShortPositionName(card.position);
                 break;
 
                 // Diðer kart türlerinde þimdilik hiçbir alan gösterilmiyor

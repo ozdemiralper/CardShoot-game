@@ -1,85 +1,68 @@
-using System.Collections.Generic;
-using UnityEngine;
+using System.Collections.Generic;  // Collections for lists / Listeler için koleksiyonlar
+using UnityEngine;                 // Unity engine temel namespace'i / Unity motorunun temel isim alaný
 
 public class PlayerHand : MonoBehaviour
 {
-    [Header("Card Prefabs")]
-    public GameObject playerCardPrefab;
-    public GameObject cupCardPrefab;
-    public GameObject weatherCardPrefab;
-    public GameObject coachCardPrefab;
-    public GameObject trophyCardPrefab;
-    public GameObject extraCardPrefab;
+    [Header("Card Prefabs")]       // Inspector baþlýðý / Inspector'daki baþlýk
 
+    public GameObject playerCardPrefab;  // Prefab for player cds        / Oyuncu kartlarý için prefab
+    public GameObject captainCardPrefab; // Prefab for captain cards     / Kaptan kartlarý için prefab
+    public GameObject weatherCardPrefab; // Prefab for weather card      / Hava durumu kartlarý için prefab
+    public GameObject coachCardPrefab;   // Prefab for coach cards       / Teknik adam kartlarý için prefab
+    public GameObject trophyCardPrefab;  // Prefab for trophy cards      / Kupa kartlarý için prefab
+    public GameObject extraCardPrefab;   // Prefab for extra cards       / Ekstra kartlar için prefab
 
-    public Transform handPanel;         // Sadece Image içeren prefab
-    private List<Card> cardsInHand = new List<Card>();
+    public Transform handPanel;                         // UI panel where cards in hand are displayed    / Eldeki kartlarýn gösterildiði UI paneli
+    private List<Card> cardsInHand = new List<Card>();  // List holding current cards in hand            / Elde bulunan kartlarýn listesi
 
-    public void AddCard(Card card)
+    public void AddCard(Card card)         // Add a card to the hand / Ele kart ekle
     {
-        cardsInHand.Add(card);
-        DisplayHand(); // Her kart eklediðinde UI'ya da yansýt
+        cardsInHand.Add(card);             // Add to the list        / Listeye ekle
+        DisplayHand();                     // Refresh display        / Görüntüyü güncelle
     }
 
-
-    public void RemoveCard(Card card)
+    public void ClearHand()                // Clear all cards from hand / Elde kartlarý temizle
     {
-        if (cardsInHand.Contains(card))
-            cardsInHand.Remove(card);
-    }
-
-    public void ClearHand()
-    {
-        cardsInHand.Clear();
+        cardsInHand.Clear();               
 
         foreach (Transform child in handPanel)
-            Destroy(child.gameObject);
+            Destroy(child.gameObject);    // Destroy all card UI objects / Tüm kart UI objelerini yok et
     }
 
-    public int GetCardCount()
+    public int GetCardCount()              // Get current number of cards in hand / Elde kaç kart var döndür
     {
-        return cardsInHand.Count;
+        return cardsInHand.Count;          
     }
-  
-    public void DisplayHand()
+
+    public void DisplayHand()              // Show cards in the hand panel / Kartlarý UI panelinde göster
     {
-        // Önce eski kart objelerini temizle
         foreach (Transform child in handPanel)
-            Destroy(child.gameObject);
+            Destroy(child.gameObject);    
 
-        foreach (Card card in cardsInHand)
+        foreach (Card card in cardsInHand)  // For each card in hand / Elde her kart için
         {
-            GameObject selectedPrefab = GetPrefabForCard(card.cardType);
-            GameObject cardObj = Instantiate(selectedPrefab, handPanel);
+            GameObject selectedPrefab = GetPrefabForCard(card.cardType);  
+            GameObject cardObj = Instantiate(selectedPrefab, handPanel);  
 
-            SelectableCard selectable = cardObj.GetComponent<SelectableCard>();
+            SelectableCard selectable = cardObj.GetComponent<SelectableCard>();  // Get selectable component / Selectable bileþenini al
             if (selectable != null)
             {
-                selectable.SetCard(card);
+                selectable.SetCard(card);   
             }
         }
     }
 
-    private GameObject GetPrefabForCard(CardType type)
+    private GameObject GetPrefabForCard(CardType type)  // Return prefab for a card type / Kart tipi için prefab döndür
     {
         switch (type)
         {
-            case CardType.Player:
-                return playerCardPrefab;
-            case CardType.Cup:
-                return cupCardPrefab;
-            case CardType.Weather:
-                return weatherCardPrefab;
-            case CardType.Coach:
-                return coachCardPrefab;
-            case CardType.Trophy:
-                return trophyCardPrefab;
-            case CardType.Extra:
-                return extraCardPrefab;
-            default:
-                return playerCardPrefab; // default fallback
+            case CardType.Player: return playerCardPrefab; 
+            case CardType.Captain: return captainCardPrefab;      
+            case CardType.Weather: return weatherCardPrefab; 
+            case CardType.Coach: return coachCardPrefab;   
+            case CardType.Trophy: return trophyCardPrefab;  
+            case CardType.Extra: return extraCardPrefab;  
+            default: return playerCardPrefab;  
         }
     }
-
-
 }

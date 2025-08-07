@@ -77,14 +77,12 @@ public class CardManager : MonoBehaviour
         }
     }
 
-
-
     void UpdateCardCountUI()
     {
         if (handCardCountDisplay != null)
         {
             handCardCountDisplay.SetPlayerCardCount(playerHand.GetCardCount());
-            handCardCountDisplay.SetOpponentCardCount(10); // Örnek rakip kart sayýsý, deðiþtirebilirsin
+            handCardCountDisplay.SetOpponentCardCount(10); 
         }
     }
 }

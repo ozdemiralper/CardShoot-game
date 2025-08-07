@@ -2,20 +2,18 @@ using UnityEngine;
 
 public class CardSelectionManager : MonoBehaviour
 {
-
     public static CardSelectionManager Instance;
-    public GameObject cupChoicePanel;  // Inspector'dan atamak için
-
-    public SelectableCard selectedCard = null;
 
     [Header("Info Card Settings")]
-    public Transform infoCardPanel;        // Info kartlarýn oluþturulacaðý panel
-    public GameObject infoPlayerCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
-    public GameObject infoWeatherCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
-    public GameObject infoCupCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
-    public GameObject infoCoachCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
-    public GameObject infoTrophyCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
-    public GameObject infoExtraCardPrefab;      // Info kart prefabý (normal kart prefabýnýn geliþmiþ versiyonu)
+    public Transform infoCardPanel;
+    public GameObject infoPlayerCardPrefab;
+    public GameObject infoWeatherCardPrefab;
+    public GameObject infoCaptainCardPrefab;
+    public GameObject infoCoachCardPrefab;
+    public GameObject infoTrophyCardPrefab;
+    public GameObject infoExtraCardPrefab;
+
+    private SelectableCard selectedCard = null;
 
     void Awake()
     {
@@ -23,6 +21,7 @@ public class CardSelectionManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    // Kart seçildiðinde çaðrýlýr (tek týklama)
     public void SelectCard(SelectableCard card)
     {
         if (selectedCard != null && selectedCard != card)
@@ -35,13 +34,7 @@ public class CardSelectionManager : MonoBehaviour
         selectedCard.Select();
 
         CreateInfoCard(card);
-
-        if (card.card.cardType == CardType.Cup)
-            cupChoicePanel.SetActive(true);
-        else
-            cupChoicePanel.SetActive(false);
     }
-
 
     void ClearInfoCard()
     {
@@ -70,8 +63,8 @@ public class CardSelectionManager : MonoBehaviour
                 return infoPlayerCardPrefab;
             case CardType.Weather:
                 return infoWeatherCardPrefab;
-            case CardType.Cup:
-                return infoCupCardPrefab;
+            case CardType.Captain:
+                return infoCaptainCardPrefab;
             case CardType.Coach:
                 return infoCoachCardPrefab;
             case CardType.Trophy:
@@ -79,32 +72,8 @@ public class CardSelectionManager : MonoBehaviour
             case CardType.Extra:
                 return infoExtraCardPrefab;
             default:
-                return infoPlayerCardPrefab; // default fallback
+                return infoPlayerCardPrefab;
         }
     }
-
-
-    public void DeselectAll()
-    {
-        if (selectedCard != null)
-        {
-            selectedCard.Deselect();
-            selectedCard = null;
-            ClearInfoCard();
-        }
-        if (cupChoicePanel != null)
-            cupChoicePanel.SetActive(false);
-    }
-
-    public void ClearSelection()
-    {
-        selectedCard = null;
-    }
-
-    public SelectableCard GetSelectedCard()
-    {
-        return selectedCard;
-    }
-
 
 }

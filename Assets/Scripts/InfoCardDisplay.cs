@@ -40,8 +40,8 @@ public class InfoCardDisplay : MonoBehaviour
                 break;
 
             case CardType.Weather:
-                powerText.text = GetWeatherEffectName(card.cardPower); // "RAIN", "SNOW", vs.
-                powerText.gameObject.SetActive(true);
+                playerNameText.text = GetWeatherEffectName(card.cardPower); // "RAIN", "SNOW", vs.
+                playerNameText.gameObject.SetActive(true);
 
                 positionText.text = GetShortPositionName(card.position); // Etki alaný olarak gösteriyoruz
                 positionText.gameObject.SetActive(true);
@@ -49,12 +49,15 @@ public class InfoCardDisplay : MonoBehaviour
                 // Ýsim gösterilmeyecek
                 break;
 
-            case CardType.Cup:
-                powerText.text = "CUP";
+            case CardType.Captain:
+                powerText.text = "2X";
                 powerText.gameObject.SetActive(true);
 
-                positionText.text = "X2";
+                positionText.text = GetShortPositionName(card.position);
                 positionText.gameObject.SetActive(true);
+
+                playerNameText.text = "CAPTAIN";
+                playerNameText.gameObject.SetActive(true);
                 break;
             default:
                 // Sadece açýklama ve resim gösterilir
