@@ -43,11 +43,6 @@ public class PlayerDataManager : MonoBehaviour
             int index = Mathf.Clamp(avatarIndex, 0, coachCards.Count - 1);
             selectedAvatarSprite = Resources.Load<Sprite>(coachCards[index].imagePath);
         }
-        else
-        {
-            Debug.LogWarning("Coach kartlarý bulunamadý!");
-            selectedAvatarSprite = null;
-        }
     }
 
     public void SetPlayerData(string nick, Sprite avatar)

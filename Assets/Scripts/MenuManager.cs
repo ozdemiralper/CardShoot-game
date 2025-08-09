@@ -10,48 +10,55 @@ public class MenuManager : MonoBehaviour
     public Button creditsButton;
     public Button helpButton;
     public Button quitButton;
+    public Button myDeckButton;  // Yeni eklenen
 
     [Header("Play Alt Menü Paneli")]
     public GameObject playSubMenuPanel;
     public Button singlePlayerButton;
     public Button multiplayerButton;
 
-    void OnPlayClicked()
+    // Fonksiyonlar public oldu, Inspector’dan atanabilir
+
+    public void OnPlayClicked()
     {
         bool isActive = playSubMenuPanel.activeSelf;
         playSubMenuPanel.SetActive(!isActive);
     }
 
-
-    void OnOptionsClicked()
+    public void OnOptionsClicked()
     {
         SceneManager.LoadScene("OptionsScene");
     }
 
-    void OnCreditsClicked()
+    public void OnCreditsClicked()
     {
         Debug.Log("Credits seçildi");
     }
 
-    void OnHelpClicked()
+    public void OnHelpClicked()
     {
         Debug.Log("Help seçildi");
     }
 
-    void OnQuitClicked()
+    public void OnQuitClicked()
     {
         Debug.Log("Oyun kapatýlýyor...");
         Application.Quit();
     }
 
-    void OnSinglePlayerClicked()
+    public void OnSinglePlayerClicked()
     {
         SceneManager.LoadScene("GameScene");
     }
 
-    void OnMultiplayerClicked()
+    public void OnMultiplayerClicked()
     {
         Debug.Log("Multiplayer seçildi");
         SceneManager.LoadScene("MultiplayerScene");
+    }
+
+    public void OnMyDeckClicked()
+    {
+        SceneManager.LoadScene("MyDeckScene");
     }
 }
