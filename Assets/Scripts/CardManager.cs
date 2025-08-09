@@ -30,6 +30,9 @@ public class CardManager : MonoBehaviour
             int randIndex = Random.Range(0, CardDatabase.cardList.Count);
             Card card = CardDatabase.cardList[randIndex];
 
+            // Burada sadece Player, Captain veya Weather kartlarýna izin ver
+            if (card.cardType != CardType.Player && card.cardType != CardType.Captain && card.cardType != CardType.Weather)
+                continue;
             // Ayný isimli karttan fazla verme
             if (cardNameCounts.ContainsKey(card.cardName) && cardNameCounts[card.cardName] >= maxSameCard)
                 continue;

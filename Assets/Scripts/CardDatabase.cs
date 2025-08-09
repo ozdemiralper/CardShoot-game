@@ -8,36 +8,43 @@ public class CardDatabase : MonoBehaviour
 
     void Awake()
     {
-        cardList.Add(new Card(CardType.Player, 1, "Domaldo", 10, "Efsane forvet", 2, 0, 0, "Cards/domaldo"));
-        cardList.Add(new Card(CardType.Player, 2, "Mesci.Y", 10, "The GOAT", 2, 0, 0, "Cards/mesciy"));
-        cardList.Add(new Card(CardType.Player, 3, "Pandik", 8, "Duvar gibi defans", 0, 0, 0, "Cards/pandik"));
-        cardList.Add(new Card(CardType.Player, 4, "Biruni", 9, "....", 1, 0, 0, "Cards/biruni"));
-        cardList.Add(new Card(CardType.Player, 5, "Djbala", 8, "Hýz canavarý", 2, 0, 0, "Cards/djbala"));
-        cardList.Add(new Card(CardType.Player, 6, "Pedroso", 7, "Genç yetenek", 1, 0, 0, "Cards/pedroso"));
-        cardList.Add(new Card(CardType.Player, 7, "Kralex", 8, "Pas ustasý", 1, 0, 0, "Cards/kralex"));
-        cardList.Add(new Card(CardType.Player, 8, "Neyvar", 10, "Çalým ustasý", 2, 0, 0, "Cards/neyvar"));
-        cardList.Add(new Card(CardType.Player, 9, "Reyis", 7, "Kendini satar takýmý asla", 2, 0, 0, "Cards/reyis"));
-        cardList.Add(new Card(CardType.Player, 10, "S.Vamos", 9, "Kaptan kýrmýzý kart", 0, 0, 0, "Cards/svamos"));
-        cardList.Add(new Card(CardType.Player, 11, "Embapo", 9, "....", 2, 0, 0, "Cards/embapo"));
-        cardList.Add(new Card(CardType.Player, 12, "Lewandoesk", 9, "Güçlü ve etkili forvet, mükemmel golcü.", 2, 0, 0, "Cards/lewandoesk"));
-        cardList.Add(new Card(CardType.Player, 13, "Decenrice", 8, "Dayanýklý ve pas isabeti yüksek orta saha oyuncusu.", 1, 0, 0, "Cards/decenrice"));
-        cardList.Add(new Card(CardType.Player, 14, "Minato", 6, "Hava toplarýnda etkili defans oyuncusu.", 0, 0, 0, "Cards/minato"));
-        cardList.Add(new Card(CardType.Player, 15, "Lingaldo", 2, "Zaman zaman sahneye çýkan orta saha oyuncusu.", 1, 0, 0, "Cards/lingaldo"));
-        cardList.Add(new Card(CardType.Player, 16, "Calhanoro", 7, "Uzaktan þutlarý ve duran toplarýyla etkili oyun kurucu.", 1, 0, 0, "Cards/calhanoro"));
-        cardList.Add(new Card(CardType.Player, 17, "Kadiolu", 7, "Çift yönlü oynayabilen dinamik bek oyuncusu.", 0, 0, 0, "Cards/kadiolu"));
-        cardList.Add(new Card(CardType.Player, 18, "Arraske", 7, "Tekniðiyle öne çýkan yaratýcý orta saha oyuncusu.", 1, 0, 0, "Cards/arraske"));
-        cardList.Add(new Card(CardType.Player, 19, "Rafasel", 6, "Hýzý ve çevikliðiyle fark yaratan ofansif orta saha.", 1, 0, 0, "Cards/rafasel"));
-        cardList.Add(new Card(CardType.Player, 20, "Sanvicho", 6, "Fizik gücü yüksek, müdahaleleri sert bir stoper.", 0, 0, 0, "Cards/sanvicho"));
+        if (cardList.Count == 0)
+        {
+            cardList.Add(new Card(CardType.Player, 1, "Domaldo", 10, "Efsane forvet", 2, 0, 0, "Cards/domaldo"));
+            cardList.Add(new Card(CardType.Player, 2, "Mesci.Y", 10, "The GOAT", 2, 0, 0, "Cards/mesciy"));
+            cardList.Add(new Card(CardType.Player, 3, "Pandik", 8, "Duvar gibi defans", 0, 0, 0, "Cards/pandik"));
+            cardList.Add(new Card(CardType.Player, 4, "Biruni", 9, "....", 1, 0, 0, "Cards/biruni"));
+            cardList.Add(new Card(CardType.Player, 5, "Djbala", 8, "Hýz canavarý", 2, 0, 0, "Cards/djbala"));
+            cardList.Add(new Card(CardType.Player, 6, "Pedroso", 7, "Genç yetenek", 1, 0, 0, "Cards/pedroso"));
+            cardList.Add(new Card(CardType.Player, 7, "Kralex", 8, "Pas ustasý", 1, 0, 0, "Cards/kralex"));
+            cardList.Add(new Card(CardType.Player, 8, "Neyvar", 10, "Çalým ustasý", 2, 0, 0, "Cards/neyvar"));
+            cardList.Add(new Card(CardType.Player, 9, "Reyis", 7, "Kendini satar takýmý asla", 2, 0, 0, "Cards/reyis"));
+            cardList.Add(new Card(CardType.Player, 10, "S.Vamos", 9, "Kaptan kýrmýzý kart", 0, 0, 0, "Cards/svamos"));
+            cardList.Add(new Card(CardType.Player, 11, "Embapo", 9, "....", 2, 0, 0, "Cards/embapo"));
+            cardList.Add(new Card(CardType.Player, 12, "Lewandoesk", 9, "Güçlü ve etkili forvet, mükemmel golcü.", 2, 0, 0, "Cards/lewandoesk"));
+            cardList.Add(new Card(CardType.Player, 13, "Decenrice", 8, "Dayanýklý ve pas isabeti yüksek orta saha oyuncusu.", 1, 0, 0, "Cards/decenrice"));
+            cardList.Add(new Card(CardType.Player, 14, "Minato", 6, "Hava toplarýnda etkili defans oyuncusu.", 0, 0, 0, "Cards/minato"));
+            cardList.Add(new Card(CardType.Player, 15, "Lingaldo", 2, "Zaman zaman sahneye çýkan orta saha oyuncusu.", 1, 0, 0, "Cards/lingaldo"));
+            cardList.Add(new Card(CardType.Player, 16, "Calhanoro", 7, "Uzaktan þutlarý ve duran toplarýyla etkili oyun kurucu.", 1, 0, 0, "Cards/calhanoro"));
+            cardList.Add(new Card(CardType.Player, 17, "Kadiolu", 7, "Çift yönlü oynayabilen dinamik bek oyuncusu.", 0, 0, 0, "Cards/kadiolu"));
+            cardList.Add(new Card(CardType.Player, 18, "Arraske", 7, "Tekniðiyle öne çýkan yaratýcý orta saha oyuncusu.", 1, 0, 0, "Cards/arraske"));
+            cardList.Add(new Card(CardType.Player, 19, "Rafasel", 6, "Hýzý ve çevikliðiyle fark yaratan ofansif orta saha.", 1, 0, 0, "Cards/rafasel"));
+            cardList.Add(new Card(CardType.Player, 20, "Sanvicho", 6, "Fizik gücü yüksek, müdahaleleri sert bir stoper.", 0, 0, 0, "Cards/sanvicho"));
 
-        cardList.Add(new Card(CardType.Weather, 200, "Rain", 0, "Defans oyuncularýnýn kabusu.", 0, 0, 0, "Cards/rain"));
-        cardList.Add(new Card(CardType.Weather, 201, "Snow", 1, "Kar yaðýþý, sahada kayganlýk yaratýr.", 1, 0, 0, "Cards/snow"));
-        cardList.Add(new Card(CardType.Weather, 202, "Wind", 2, "Rüzgar, topun yönünü etkiler.", 2, 0, 0, "Cards/wind"));
+            cardList.Add(new Card(CardType.Weather, 200, "Rain", 0, "Defans oyuncularýnýn kabusu.", 0, 0, 0, "Cards/rain"));
+            cardList.Add(new Card(CardType.Weather, 201, "Snow", 1, "Kar yaðýþý, sahada kayganlýk yaratýr.", 1, 0, 0, "Cards/snow"));
+            cardList.Add(new Card(CardType.Weather, 202, "Wind", 2, "Rüzgar, topun yönünü etkiler.", 2, 0, 0, "Cards/wind"));
 
-        cardList.Add(new Card(CardType.Captain, 206, "Kaptan", 0, "Bulunduðu mevkiideki oyucularý X2 yapar", 0, 0, 0, "Cards/defCap1"));
-        cardList.Add(new Card(CardType.Captain, 207, "Kaptan", 0, "Bulunduðu mevkiideki oyucularý X2 yapar", 0, 0, 0, "Cards/defCap1"));
-        cardList.Add(new Card(CardType.Captain, 208, "Kaptan", 1, "Bulunduðu mevkiideki oyucularý X2 yapar", 1, 0, 0, "Cards/midCap1"));
-        cardList.Add(new Card(CardType.Captain, 209, "Kaptan", 1, "Bulunduðu mevkiideki oyucularý X2 yapar", 1, 0, 0, "Cards/midCap2"));
-        cardList.Add(new Card(CardType.Captain, 210, "Kaptan", 2, "Bulunduðu mevkiideki oyucularý X2 yapar", 2, 0, 0, "Cards/forCap1"));
-        cardList.Add(new Card(CardType.Captain, 211, "Kaptan", 2, "Bulunduðu mevkiideki oyucularý X2 yapar", 2, 0, 0, "Cards/forCap2"));
+            cardList.Add(new Card(CardType.Captain, 206, "Kaptan", 0, "Bulunduðu mevkiideki oyucularý X2 yapar", 0, 0, 0, "Cards/defCap1"));
+            cardList.Add(new Card(CardType.Captain, 207, "Kaptan", 0, "Bulunduðu mevkiideki oyucularý X2 yapar", 0, 0, 0, "Cards/defCap1"));
+            cardList.Add(new Card(CardType.Captain, 208, "Kaptan", 1, "Bulunduðu mevkiideki oyucularý X2 yapar", 1, 0, 0, "Cards/midCap1"));
+            cardList.Add(new Card(CardType.Captain, 209, "Kaptan", 1, "Bulunduðu mevkiideki oyucularý X2 yapar", 1, 0, 0, "Cards/midCap2"));
+            cardList.Add(new Card(CardType.Captain, 210, "Kaptan", 2, "Bulunduðu mevkiideki oyucularý X2 yapar", 2, 0, 0, "Cards/forCap1"));
+            cardList.Add(new Card(CardType.Captain, 211, "Kaptan", 2, "Bulunduðu mevkiideki oyucularý X2 yapar", 2, 0, 0, "Cards/forCap2"));
+
+            cardList.Add(new Card(CardType.Coach, 300, "Coach", 0, "......", 0, 0, 0, "Cards/coach1"));
+            cardList.Add(new Card(CardType.Coach, 301, "Coach", 0, "......", 0, 0, 0, "Cards/coach2"));
+            cardList.Add(new Card(CardType.Coach, 302, "Coach", 0, "......", 0, 0, 0, "Cards/coach3"));
+        }
     }
 }

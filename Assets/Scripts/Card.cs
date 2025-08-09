@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 [System.Serializable]
 
@@ -12,7 +11,8 @@ public enum CardType
     Weather,    // Hava durumu kartý   cardPower= 0-3 (0: Normal, 1: Yaðmur, 2: Kar, 3: Fýrtýna) 
     Coach,      // Teknik direktör   
     Trophy,     // Kupa
-    Extra       // Ekstra özel kart
+    Extra,      // Ekstra özel kart
+    Avatar      // Avatar kartý
 }
 
 public class Card

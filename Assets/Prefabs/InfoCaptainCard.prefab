@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1476955501966587993}
   - component: {fileID: 4941158264621231233}
   - component: {fileID: 6685992076454199996}
+  - component: {fileID: 6347943325491829696}
   m_Layer: 5
   m_Name: InfoCaptainCard
   m_TagString: Untagged
@@ -99,6 +100,27 @@ MonoBehaviour:
   positionText: {fileID: 5396834827615696269}
   playerNameText: {fileID: 281718978349328843}
   descriptionText: {fileID: 2176283941473571012}
+--- !u!114 &6347943325491829696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4110233460931508029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &5201830817120690430
 GameObject:
   m_ObjectHideFlags: 0
