@@ -7,17 +7,20 @@ public class MenuManager : MonoBehaviour
     [Header("Ana Menü Butonlarý")]
     public Button playButton;
     public Button optionsButton;
+    public Button cardsButton;
     public Button creditsButton;
     public Button helpButton;
     public Button quitButton;
-    public Button myDeckButton;  // Yeni eklenen
 
     [Header("Play Alt Menü Paneli")]
     public GameObject playSubMenuPanel;
     public Button singlePlayerButton;
     public Button multiplayerButton;
 
-    // Fonksiyonlar public oldu, Inspector’dan atanabilir
+    [Header("Cards Alt Menü Paneli")]
+    public GameObject cardsSubMenuPanel;
+    public Button MyCards;
+    public Button AllCards;
 
     public void OnPlayClicked()
     {
@@ -25,6 +28,11 @@ public class MenuManager : MonoBehaviour
         playSubMenuPanel.SetActive(!isActive);
     }
 
+    public void OnCardsClicked()
+    {
+        bool isActive = cardsSubMenuPanel.activeSelf;
+        cardsSubMenuPanel.SetActive(!isActive);
+    }
     public void OnOptionsClicked()
     {
         SceneManager.LoadScene("OptionsScene");
@@ -42,7 +50,6 @@ public class MenuManager : MonoBehaviour
 
     public void OnQuitClicked()
     {
-        Debug.Log("Oyun kapatýlýyor...");
         Application.Quit();
     }
 
@@ -57,8 +64,13 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("MultiplayerScene");
     }
 
-    public void OnMyDeckClicked()
+    public void OnMyCardsClicked()
     {
-        SceneManager.LoadScene("MyDeckScene");
+        SceneManager.LoadScene("MyCardsScene");
+    }
+
+    public void OnAllCardsClicked()
+    {
+        SceneManager.LoadScene("AllCardsScene");
     }
 }

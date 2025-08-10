@@ -161,7 +161,6 @@ GameObject:
   - component: {fileID: 5433618164760914878}
   - component: {fileID: 5906235612923543959}
   - component: {fileID: -8561836833530546981}
-  - component: {fileID: 3197662601195659706}
   m_Layer: 5
   m_Name: WeatherCardPrefab
   m_TagString: Untagged
@@ -223,27 +222,6 @@ MonoBehaviour:
   powerText: {fileID: 0}
   positionText: {fileID: 1707330007299892059}
   cardNameText: {fileID: 4441170944526226254}
---- !u!114 &3197662601195659706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6032376185138528422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1 &6708457499736885866
 GameObject:
   m_ObjectHideFlags: 0
