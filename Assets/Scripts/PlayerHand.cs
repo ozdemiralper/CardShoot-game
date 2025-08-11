@@ -9,8 +9,6 @@ public class PlayerHand : MonoBehaviour
     public GameObject captainCardPrefab;
     public GameObject weatherCardPrefab;
     public GameObject coachCardPrefab;
-    public GameObject trophyCardPrefab;
-    public GameObject extraCardPrefab;
 
     public Transform handPanel;
     private List<Card> cardsInHand = new List<Card>();
@@ -68,8 +66,6 @@ public class PlayerHand : MonoBehaviour
             case CardType.Captain: return captainCardPrefab;
             case CardType.Weather: return weatherCardPrefab;
             case CardType.Coach: return coachCardPrefab;
-            case CardType.Trophy: return trophyCardPrefab;
-            case CardType.Extra: return extraCardPrefab;
             default: return playerCardPrefab;
         }
     }

@@ -14,7 +14,6 @@ public class CardPlayHandler : MonoBehaviour
     public List<Card> captainForwardCards = new List<Card>();
     
     public List<Card> coachCards = new List<Card>();
-    public List<Card> extraCards = new List<Card>();
 
     public TMPro.TMP_Text defensePowerText;
     public TMPro.TMP_Text midfieldPowerText;
@@ -31,13 +30,11 @@ public class CardPlayHandler : MonoBehaviour
 
     public Transform weatherArea;
     public Transform coachArea;
-    public Transform extraArea;
 
     public GameObject playerCardPrefab;
     public GameObject weatherCardPrefab;
     public GameObject captainCardPrefab;
     public GameObject coachCardPrefab;
-    public GameObject extraCardPrefab;
     
     public PlayerHand playerHand;
 
@@ -146,9 +143,6 @@ public class CardPlayHandler : MonoBehaviour
                     break;
                 case CardType.Coach:
                     prefabToUse = coachCardPrefab;
-                    break;
-                case CardType.Extra:
-                    prefabToUse = extraCardPrefab;
                     break;
                 default:
                     Debug.LogWarning("Bilinmeyen kart tipi, player prefabý kullanýlýyor.");
