@@ -8,7 +8,6 @@ public class PlayerHand : MonoBehaviour
     public GameObject playerCardPrefab;
     public GameObject captainCardPrefab;
     public GameObject weatherCardPrefab;
-    public GameObject coachCardPrefab;
 
     public Transform handPanel;
     private List<Card> cardsInHand = new List<Card>();
@@ -65,7 +64,6 @@ public class PlayerHand : MonoBehaviour
             case CardType.Player: return playerCardPrefab;
             case CardType.Captain: return captainCardPrefab;
             case CardType.Weather: return weatherCardPrefab;
-            case CardType.Coach: return coachCardPrefab;
             default: return playerCardPrefab;
         }
     }

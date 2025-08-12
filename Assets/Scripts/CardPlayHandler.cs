@@ -29,12 +29,10 @@ public class CardPlayHandler : MonoBehaviour
     public Transform forwardCaptainArea;
 
     public Transform weatherArea;
-    public Transform coachArea;
 
     public GameObject playerCardPrefab;
     public GameObject weatherCardPrefab;
     public GameObject captainCardPrefab;
-    public GameObject coachCardPrefab;
     
     public PlayerHand playerHand;
 
@@ -140,9 +138,6 @@ public class CardPlayHandler : MonoBehaviour
                     break;
                 case CardType.Captain:
                     prefabToUse = captainCardPrefab;
-                    break;
-                case CardType.Coach:
-                    prefabToUse = coachCardPrefab;
                     break;
                 default:
                     Debug.LogWarning("Bilinmeyen kart tipi, player prefabý kullanýlýyor.");

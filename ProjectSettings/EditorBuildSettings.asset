@@ -18,9 +18,15 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
     guid: 352d4f194d3e2ad42be187edac3d2aad
   - enabled: 1
+    path: Assets/Scenes/GameScene1.unity
+    guid: f38d06eab50db85449ca46094d85f40e
+  - enabled: 1
     path: Assets/Scenes/MyCardsScene.unity
     guid: 484564c4580dc17429c14ffe337135cc
   - enabled: 1
     path: Assets/Scenes/AllCardsScene.unity
     guid: fa271cd648ec7d04f92bf3cd36f21982
+  - enabled: 1
+    path: Assets/Scenes/CardSelectionScene.unity
+    guid: 3729c309321134945a89b88280c7fcf1
   m_configObjects: {}

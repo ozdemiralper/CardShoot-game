@@ -61,7 +61,7 @@ public class MenuManager : MonoBehaviour
     public void OnMultiplayerClicked()
     {
         Debug.Log("Multiplayer seçildi");
-        SceneManager.LoadScene("MultiplayerScene");
+        SceneManager.LoadScene("CardSelectionScene");
     }
 
     public void OnMyCardsClicked()

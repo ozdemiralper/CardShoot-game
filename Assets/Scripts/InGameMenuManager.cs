@@ -42,7 +42,6 @@ public class InGameMenuManager : MonoBehaviour
         // Ayar paneli save butonu
         saveButton.onClick.AddListener(SaveSettings);
 
-        // Coach kartlarýný yükle
         coachCards = CardDatabase.cardList
             .Where(c => c.cardType == CardType.Coach)
             .ToList();

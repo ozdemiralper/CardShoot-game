@@ -9,7 +9,6 @@ public class CardSelectionManager : MonoBehaviour
     public GameObject infoPlayerCardPrefab;
     public GameObject infoWeatherCardPrefab;
     public GameObject infoCaptainCardPrefab;
-    public GameObject infoCoachCardPrefab;
 
     private SelectableCard selectedCard = null;
 
@@ -60,8 +59,6 @@ public class CardSelectionManager : MonoBehaviour
                 return infoWeatherCardPrefab;
             case CardType.Captain:
                 return infoCaptainCardPrefab;
-            case CardType.Coach:
-                return infoCoachCardPrefab;
             default:
                 return infoPlayerCardPrefab;
         }
