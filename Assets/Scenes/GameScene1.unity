@@ -1251,7 +1251,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397476039}
   m_CullTransparentMesh: 1
---- !u!1 &451312669
+--- !u!1 &438393140
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1259,45 +1259,73 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 451312671}
-  - component: {fileID: 451312672}
-  m_Layer: 0
-  m_Name: GameManager
+  - component: {fileID: 438393141}
+  - component: {fileID: 438393143}
+  - component: {fileID: 438393142}
+  m_Layer: 5
+  m_Name: OzexIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &451312671
-Transform:
+--- !u!224 &438393141
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451312669}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2730267, y: -1.4709386, z: 0.05214241}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 438393140}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1530439073}
+  m_Father: {fileID: 1318935160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &451312672
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -756.1, y: -487.5}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &438393142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451312669}
+  m_GameObject: {fileID: 438393140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52d1d84b4db4ae34bad91712593bf749, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handPanel: {fileID: 1888649308}
-  cardPrefab: {fileID: 6032376185138528422, guid: 53206264a957795458f7b122d3fbed97, type: 3}
-  playerHand: {fileID: 1579656780}
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 4159ece5fa770c642ab9f0292a83cd03, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &438393143
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438393140}
+  m_CullTransparentMesh: 1
 --- !u!1 &480414064
 GameObject:
   m_ObjectHideFlags: 0
@@ -3898,6 +3926,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1028531520}
+  - {fileID: 438393141}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5141,7 +5170,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 451312671}
   - {fileID: 1579656781}
   - {fileID: 2028287305}
   - {fileID: 1943714685}
@@ -5357,7 +5385,6 @@ MonoBehaviour:
   playerCardPrefab: {fileID: 6032376185138528422, guid: 53206264a957795458f7b122d3fbed97, type: 3}
   captainCardPrefab: {fileID: 6032376185138528422, guid: e3f827e1001e5a64ab197382fe048d69, type: 3}
   weatherCardPrefab: {fileID: 6032376185138528422, guid: 7ed4353b43dad08489f1cbb02dc677bc, type: 3}
-  coachCardPrefab: {fileID: 0}
   handPanel: {fileID: 1888649308}
   cardCountText: {fileID: 1583294623}
 --- !u!4 &1579656781
@@ -5467,7 +5494,6 @@ MonoBehaviour:
   infoPlayerCardPrefab: {fileID: 4110233460931508029, guid: c1b49fece6080ae4dbafa497e3fcfce4, type: 3}
   infoWeatherCardPrefab: {fileID: 4110233460931508029, guid: 7bd3382dd4e5b614f9303f758853e63c, type: 3}
   infoCaptainCardPrefab: {fileID: 4110233460931508029, guid: b99b7bb0ba0243343bc3011311b865d2, type: 3}
-  infoCoachCardPrefab: {fileID: 0}
 --- !u!1 &1583294621
 GameObject:
   m_ObjectHideFlags: 0
@@ -6523,11 +6549,9 @@ MonoBehaviour:
   midfieldCaptainArea: {fileID: 1671130461}
   forwardCaptainArea: {fileID: 816844662}
   weatherArea: {fileID: 1788859898}
-  coachArea: {fileID: 0}
   playerCardPrefab: {fileID: 6032376185138528422, guid: 53206264a957795458f7b122d3fbed97, type: 3}
   weatherCardPrefab: {fileID: 6032376185138528422, guid: 7ed4353b43dad08489f1cbb02dc677bc, type: 3}
   captainCardPrefab: {fileID: 6032376185138528422, guid: e3f827e1001e5a64ab197382fe048d69, type: 3}
-  coachCardPrefab: {fileID: 0}
   playerHand: {fileID: 1579656780}
 --- !u!1 &1888649307
 GameObject:
@@ -6872,7 +6896,6 @@ MonoBehaviour:
   infoPlayerCardPrefab: {fileID: 4110233460931508029, guid: c1b49fece6080ae4dbafa497e3fcfce4, type: 3}
   infoWeatherCardPrefab: {fileID: 4110233460931508029, guid: 7bd3382dd4e5b614f9303f758853e63c, type: 3}
   infoCaptainCardPrefab: {fileID: 4110233460931508029, guid: b99b7bb0ba0243343bc3011311b865d2, type: 3}
-  infoCoachCardPrefab: {fileID: 4110233460931508029, guid: c1b49fece6080ae4dbafa497e3fcfce4, type: 3}
 --- !u!1 &2002914914
 GameObject:
   m_ObjectHideFlags: 0

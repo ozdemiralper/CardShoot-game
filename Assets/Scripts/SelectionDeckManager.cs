@@ -15,6 +15,7 @@ public class SelectionDeckManager : MonoBehaviour
 
     public TMP_Text selectedCountText;  // TMP Text component referansý
     public Button startButton;           // Baþlat butonu referansý
+    public Button cancelButton;          // Ýptal butonu referansý
 
     private List<Card> randomCards = new List<Card>();
     private List<Card> selectedCards = new List<Card>();
@@ -102,4 +103,9 @@ public class SelectionDeckManager : MonoBehaviour
         GameManager.Instance.selectedGameDeck = selectedCards;
         SceneManager.LoadScene("GameScene1");
     }
+    public void OnCancelButton()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+
 }
