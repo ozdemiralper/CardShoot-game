@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d93f0db88efa69a4eac7d8060b54b671
+guid: 96ca87ca430a6064abdea70afd564aab
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9020502421553386018
-    second: ballCoin_0
+      213: 2841526449044699139
+    second: goalButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ballCoin_0
+      name: goalButton_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 500
-        height: 500
+        width: 1000
+        height: 1200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: edd62cb17dcb0d280800000000000000
-      internalID: -9020502421553386018
+      spriteID: 308bf2710412f6720800000000000000
+      internalID: 2841526449044699139
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ballCoin_0: -9020502421553386018
+      goalButton_0: 2841526449044699139
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
