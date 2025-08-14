@@ -104,7 +104,7 @@ public class InGameMenuManager : MonoBehaviour
         PlayerPrefs.Save();
 
         // UI'yi güncelle
-        PlayerUIController uiManager = FindObjectOfType<PlayerUIController>();
+        PlayerUIController uiManager = Object.FindAnyObjectByType<PlayerUIController>();
         if (uiManager != null)
         {
             uiManager.UpdateUI();

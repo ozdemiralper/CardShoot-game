@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -14,6 +15,7 @@ public class SelectionDeckManager : MonoBehaviour
     public int totalSelectionLimit = 10;
 
     public TMP_Text selectedCountText;  // TMP Text component referansý
+    public TMP_Text countdownText;      // Geri sayým metni
     public Button startButton;           // Baþlat butonu referansý
     public Button cancelButton;          // Ýptal butonu referansý
 
@@ -21,37 +23,43 @@ public class SelectionDeckManager : MonoBehaviour
     private List<Card> selectedCards = new List<Card>();
 
     public int SelectedCardsCount => selectedCards.Count;
+
+    private float maxTime = 10f;
+    private float remainingTime;
+    private bool gameStarted = false;
+
     void Start()
     {
         GenerateRandomCards();
         UpdateSelectedCountUI();
         startButton.interactable = false; // Baþlangýçta kapalý
+        countdownText.text = $"{maxTime}";
+
+        remainingTime = maxTime;
+        StartCoroutine(CountdownTimer());
+
+        startButton.onClick.AddListener(OnStartButton);
+        cancelButton.onClick.AddListener(OnCancelButton);
     }
 
     void GenerateRandomCards()
     {
-        // Önce önceki kartlarý ve listeyi temizle
         randomCards.Clear();
 
         foreach (Transform child in contentPanel)
-        {
             Destroy(child.gameObject);
-        }
 
-        // Kullanýcýnýn sahip olduðu kartlarý al ve yeni listeye kopyala
         var playerDeck = new List<Card>(SplashSceneManager.playerCards.GetOwnedCards());
 
-        // Listeyi rastgele karýþtýr (shuffle)
+        // Listeyi rastgele karýþtýr
         playerDeck = playerDeck.OrderBy(x => Random.value).ToList();
 
-        // Ýlk 15 kartý seç (eðer varsa) ve ID'ye göre büyükten küçüðe sýrala
+        // Ýlk 15 kartý seç ve ID'ye göre büyükten küçüðe sýrala
         int cardCount = Mathf.Min(15, playerDeck.Count);
         randomCards = playerDeck.Take(cardCount).OrderByDescending(card => card.cardID).ToList();
 
-        // Kartlarý instantiate et
         foreach (var card in randomCards)
         {
-
             GameObject prefab = null;
             if (card.cardType == CardType.Player) prefab = selectPlayerPrefab;
             else if (card.cardType == CardType.Captain) prefab = selectCaptainPrefab;
@@ -63,11 +71,11 @@ public class SelectionDeckManager : MonoBehaviour
                 var selectable = cardObj.GetComponent<SelectableCardV2>();
                 if (selectable != null)
                 {
-                    selectable.selectionManager = this;  // Burada referans veriyoruz
+                    selectable.selectionManager = this;
                     selectable.SetCard(card);
                 }
                 var item = cardObj.GetComponent<CardSelectionItem>();
-                item.Setup(card, this);
+                if (item != null) item.Setup(card, this);
             }
         }
     }
@@ -89,8 +97,8 @@ public class SelectionDeckManager : MonoBehaviour
             selectedCards.Remove(card);
         }
 
-        UpdateSelectedCountUI();  // Seçim deðiþince sayaç güncelle
-        startButton.interactable = (selectedCards.Count == totalSelectionLimit); // Start buton durumu
+        UpdateSelectedCountUI();
+        startButton.interactable = (selectedCards.Count == totalSelectionLimit);
     }
 
     void UpdateSelectedCountUI()
@@ -98,14 +106,45 @@ public class SelectionDeckManager : MonoBehaviour
         selectedCountText.text = $"Selected Cards: {selectedCards.Count} / {totalSelectionLimit}";
     }
 
-    public void OnStartButton()
+    IEnumerator CountdownTimer()
     {
+        while (remainingTime > 0 && !gameStarted)
+        {
+            countdownText.text = $"{Mathf.CeilToInt(remainingTime)}";
+            remainingTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        if (!gameStarted)
+        {
+            gameStarted = true;
+            AutoSelectCards();
+        }
+    }
+
+    void AutoSelectCards()
+    {
+        // Eðer oyuncu kart seçmediyse, en küçük ID’li son 10 kartý seç
+        if (selectedCards.Count < totalSelectionLimit)
+        {
+            var sortedCards = randomCards.OrderBy(c => c.cardID).ToList();
+            selectedCards = sortedCards.Take(totalSelectionLimit).ToList();
+        }
         GameManager.Instance.selectedGameDeck = selectedCards;
         SceneManager.LoadScene("GameScene1");
     }
+
+    public void OnStartButton()
+    {
+        if (gameStarted) return;
+        gameStarted = true;
+
+        GameManager.Instance.selectedGameDeck = selectedCards;
+        SceneManager.LoadScene("GameScene1");
+    }
+
     public void OnCancelButton()
     {
         SceneManager.LoadScene("MenuScene");
     }
-
 }

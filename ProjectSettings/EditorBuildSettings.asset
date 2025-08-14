@@ -30,3 +30,4 @@ EditorBuildSettings:
     path: Assets/Scenes/CardSelectionScene.unity
     guid: 3729c309321134945a89b88280c7fcf1
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
